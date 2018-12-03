@@ -1,0 +1,23 @@
+{
+ "name": "burgers",
+ "version": "1.0.0",
+ "description": "es6-modules-express-mongo-docker-burgers-crud",
+ "author": "Lucas Frecia <frecialucas@gmail.com>",
+ "private": false,
+ "license": "MIT",
+ "repository": "git@github.com:LucasFrecia/es6-modules-express-mongo-docker-burgers-crud.git",
+ "scripts": {
+  "start": "node app.js"
+ },
+ "dependencies": {
+  "body-parser": "~1.18.2",
+  "express": "~4.16.4",
+  "mongodb": "~3.1.0",
+  "monk": "~6.0.6",
+  "serve-favicon": "~2.4.5",
+  "helmet": "^3.1.0",
+  "multer": "^1.4.1",
+  "request": "^2.83.0"
+ }
+}
+ 

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <base href="/">
+    <meta name="author" content="Lucas Frecia frecialucas@gmail.com" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="A front-end template that helps you build fast, modern mobile web apps.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <title>Burgers</title>
+    <link rel="shortcut icon" href="/burger-black-and-white.jpg">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="/foundation.min.css" >
+  </head>
+  <body >
+    <div>
+      <header class="header" >
+        <div class="row title" >
+            <span style="display:inline;" >BURGERS</span>
+            <span style="display:inline;" id="total-items" ></span>
+        </div>
+      </header>
+      <main class="">
+        <section class="row actions" >
+            <div class="small-12 columns">
+                <div id="" >
+                <button id="createBtn" class="button add" >ADD NEW BURGER</button>
+                <button id="deleteBtn" class="button delete" >DELETE ALL</button>
+            </div>
+        </section>
+        <section class="row hidden" id="new-buerger-form" >
+            <div class="new-buerger-card" >
+                <div id="newImage" class="image-container small-12 large-6">
+                    <img id="new-burger-image" class="card-image" src="burger-black-and-white.jpg" alt="Burger pic" >
+                </div>
+                <div class="container card-text small-12 large-6">
+                    <label for="counter-input" class="label">Characters left: <span id="counter-display" class="tag success" >0</span></label>
+                    <textarea class="boxsize" id="new-burger-text" placeholder="Burger description..." maxlength="300" rows="6" ></textarea>
+                </div>
+                <div class="container card-text small-12 large-6" >
+                    <input type="file" name="file" id="file" accept="image/*" >
+                </div>
+                <div class="container card-text small-12 large-6" >
+                    <button id="addBtn" class="button add">SAVE</button>
+                    <button id="cancelBtn" class="button delete" >CANCEL</button>
+                </div>
+            </div>
+        </section>
+        <section id="burger-list" class="row" >
+            <div class="divider" ></div>
+            <!-- Our burgers will be added to this section tag when app is loaded -->
+        </section>
+      </main>
+    <script type="module" src="app-module.mjs" ></script> 
+  </body>
+</html>

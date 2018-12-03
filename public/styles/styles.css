@@ -1,0 +1,183 @@
+body {
+    font-family: Roboto !important;
+}
+
+.header {
+    margin-top: 30px;
+}
+
+.title {
+    font-size: 500%;
+    font-weight: lighter;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.healthbar {
+  width: 80%;
+  height: 40px;
+  background-color: #eee;
+  margin: auto;
+  transition: width 500ms;
+}
+
+.actions,
+.list {
+  margin-top: 30px;
+  text-align: center;
+  padding: 10px;
+  border: 1px solid #ccc;
+  box-shadow: 0px 3px 6px #ccc;
+}
+
+.button {
+  font-size: 20px;
+  background-color: #eee;
+  padding: 12px;
+  box-shadow: 0 1px 1px black;
+  margin: 10px;
+}
+
+.add {
+  background-color: #aaffb0;
+}
+
+.add:hover {
+  background-color: #76ff7e;
+}
+
+.delete {
+  background-color: #ff7367;
+}
+
+.delete:hover {
+  background-color: #ff3f43;
+}
+
+.boxsize {
+    width: 100%;
+}
+
+/* CARD CSS START */
+.card, .new-buerger-card {
+  overflow: hidden;
+  background: #fff;
+  border-radius: 2px;
+ /* margin: 1rem;*/
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.card-image {
+  max-width: 100%;
+  min-width: 100%;
+  max-height: 100%;
+  border-radius: 0px;
+}
+
+.new-buerger-card {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+@media (max-width: 600px) {
+  .card, .new-buerger-card {
+    height: 550px;
+  }
+
+  .image-container {
+    float: left;
+  }
+}
+
+@media (min-width: 601px) {
+  .card, .new-buerger-card {
+    height: 300px;
+  }
+
+  .image-container {
+    height: 300px;
+    float: left;
+  }
+
+  .card-image {
+    min-height: 100%;
+  }
+}
+
+.card-text {
+  padding: 30px;
+  float: left;
+  display: block;
+}
+
+.card:hover {
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+
+/* Add some padding inside the card container */
+.container {
+  padding: 2px 16px;
+}
+
+img {
+  border-radius: 5px 5px 0 0;
+}
+/** CARD CSS END */
+
+.list {
+  margin-left: auto;
+  margin-right: auto;
+  width: 300px;
+  background: #028090;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 1.2rem;
+}
+
+.card {
+  user-select: none;
+  cursor: pointer;
+}
+
+.divider {
+  height: 10px;
+  transition: height 0.5s ease;
+}
+
+.draggable {
+  position: fixed;
+  transform: translate(-50%, -50%);
+  background: #dff1f2;
+  cursor: move;
+}
+
+.animated-draggable-item {
+  transition: all 0.2s ease;
+  transition-property: left, top;
+}
+
+.not-animated {
+  transition: none;
+}
+
+.hidden {
+    display: none;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.tag {
+    padding: 5px;
+    border-radius: 50%;
+    color: #fff;
+}
+
+.success {
+    background-color: green;
+}
+
+.error {
+    background-color: red;
+}

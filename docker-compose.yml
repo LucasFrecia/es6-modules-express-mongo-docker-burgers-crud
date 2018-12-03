@@ -1,0 +1,21 @@
+version: "3"
+services:
+  mongo:
+    container_name: mongo
+    image: mongo
+    volumes:
+      - ./data:/data/db
+    ports:
+      - "27017:27017"
+  mongo-seed:
+    build: ./mongo
+    links:
+      - mongo
+  app:
+    container_name: burgers
+    restart: always
+    build: .
+    ports:
+     - "8080:8080"
+    links:
+     - mongo
