@@ -15,6 +15,8 @@ You can build the image and run the containers with Docker-Compose
 
 `docker-compose up`
 
+Then head to `localhost:8080` in browser to see the app running
+
 If source was modified you must run with --build
 `docker-compose up --build`
 
