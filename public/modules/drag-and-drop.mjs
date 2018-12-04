@@ -6,7 +6,8 @@ import {
 } from './burger-module.mjs';
 
 /**
- * 
+ * DragDrop class
+ * @author Lucas Frecia <frecialucas@gmail.com>
  */
 export class DragDrop {
   constructor() {

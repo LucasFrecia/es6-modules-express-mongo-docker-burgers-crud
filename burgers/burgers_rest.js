@@ -40,8 +40,12 @@ BURGERS_ROUTER.prototype.handleRoutes = (router, collection, db, upload) => {
 
   });
 
-  router.put("/burger/", (req, res) => {
-
+  router.put("/burger/", upload.single('img'), (req, res) => {
+    
+    const item = req.body;
+    
+    BURGERS_ACTIONS.prototype.update(collection, db, res, item);
+  
   });
 
   router.delete("/burgers/", (req, res) => {
@@ -49,30 +53,8 @@ BURGERS_ROUTER.prototype.handleRoutes = (router, collection, db, upload) => {
     const items = req.body;
 
     BURGERS_ACTIONS.prototype.delete(collection, db, res, items);
+
   });
 };
 
 module.exports = BURGERS_ROUTER;
-   /* 
-    const collection = db.get("document");
-    collection
-      .insert([{ a: 1 }, { a: 2 }, { a: 3 }])
-      .then(docs => {
-        // Inserted 3 documents into the document collection
-      })
-      .then(() => collection.update({ a: 2 }, { $set: { b: 1 } }))
-      .then(result => {
-        // Updated the document with the field a equal to 2
-      })
-      .then(() => collection.remove({ a: 3 }))
-      .then(result => {
-        // Deleted the document with the field a equal to 3
-      })
-      .then(() => {
-        return collection.find();
-      })
-      .then(docs => {
-        res.json(docs);
-      })
-      .then(() => db.close());
-      */

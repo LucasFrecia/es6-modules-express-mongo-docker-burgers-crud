@@ -25,7 +25,6 @@ BURGERS_ACTIONS.prototype.add = (collection, db, res, doc = null) => {
     .find()
     .then((result) => {
       insertItem.position = result.length + 1;
-      console.log('NEW POSIRION', insertItem);
       collection.insert(insertItem);
     })
     .then(() => {
@@ -42,17 +41,16 @@ BURGERS_ACTIONS.prototype.add = (collection, db, res, doc = null) => {
 
 BURGERS_ACTIONS.prototype.update = (collection, db, res, doc = null) => {
   collection
-    .then(() => collection.update({ a: 2 }, { $set: { b: 1 } }))
-    .then(result => {
-      // Updated the document with the field a equal to 2
-    })
+    .update(doc)
     .then(() => {
       return collection.find();
     })
     .then(docs => {
-      return docs;
+      docs = docs.sort((a, b) => b.position - a.position);
+      res.json(docs);
     })
-    .then(() => db.close());
+    .then(() => db.close())
+    .catch(err => res.json(err));
 };
 
 BURGERS_ACTIONS.prototype.delete = (collection, db, res, doc = null) => {
@@ -64,6 +62,7 @@ BURGERS_ACTIONS.prototype.delete = (collection, db, res, doc = null) => {
       return collection.find();
     })
     .then(docs => {
+      docs = docs.sort((a, b) => b.position - a.position);
       res.json(docs);
     })
     .then(() => db.close())

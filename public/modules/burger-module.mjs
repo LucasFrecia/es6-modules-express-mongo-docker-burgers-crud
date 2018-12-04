@@ -3,6 +3,7 @@
  * @author Lucas Frecia <frecialucas@gmail.com>
  */
 import { BurgerItem } from './burger-item.mjs';
+import { BurgerEditItem } from './burger-edit-item.mjs';
 import { DragDrop } from './drag-and-drop.mjs';
 import { API } from './app-config.mjs';
 
@@ -30,12 +31,15 @@ function setCounter(totalItems) {
  * @param items
  */
 export function listBurgers(items) {
-  console.log(items);
   for (let item of items) {
     new BurgerItem(item);
 
     document.getElementById('deleteBtn' + item._id).onclick = () => {
       return remove(item._id);
+    };
+
+    document.getElementById('editBtn' + item._id).onclick = () => {
+      new BurgerEditItem(item);
     };
   }
 
@@ -104,6 +108,31 @@ export function remove(id = null) {
       'content-type': 'application/json; charset=UTF-8'
     },
     method: 'DELETE',
+    body: JSON.stringify(data)
+  };
+
+  fetch(Url, otherParam)
+    .then(data => {
+      return data.json();
+    })
+    .then(res => {
+      clearList();
+      listBurgers(res);
+    })
+    .catch(error => console.log(error));
+}
+
+/**
+ * Service method to update burgers from db
+ * @param {string} id - if no id is given, all burgers will be deleted
+ */
+export function update(data = null) {
+  const Url = `${API}burger`;
+  const otherParam = {
+    headers: {
+      'content-type': 'application/json; charset=UTF-8'
+    },
+    method: 'PUT',
     body: JSON.stringify(data)
   };
 

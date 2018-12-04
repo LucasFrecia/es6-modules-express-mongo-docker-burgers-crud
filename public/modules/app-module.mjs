@@ -9,6 +9,7 @@ import {
     counterInit
 } from './burger-module.mjs';
 import { DragDrop } from './drag-and-drop.mjs';
+import { fileLitsener } from './burger-core.mjs';
 
 /** Add litseners Start */
     let burgerForm = document.getElementById('new-buerger-form');
@@ -20,24 +21,7 @@ import { DragDrop } from './drag-and-drop.mjs';
 /** Add litseners End*/
 
 /** Add actions Start */
-    imageNode.onchange = () => {
-        let el = document.getElementById('new-burger-image');
-        /** Remove prior image if it exists */
-        if (el) { el.remove(); }
-
-        let file = imageNode.files[0];
-        let reader = new FileReader();
-        reader.onload = e => {
-            let image = document.createElement('img');
-            image.setAttribute('id', 'new-burger-image');
-            image.classList.add('card-image');
-            image.src = e.target.result;
-
-            const imgDiv = document.getElementById('newImage');
-            imgDiv.appendChild(image);
-        };
-        reader.readAsDataURL(file);
-    };
+    fileLitsener(imageNode, 'new-burger-image', 'newImage');
 
     addBtn.onclick = () => {
         let formData = new FormData();
