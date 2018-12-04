@@ -8,6 +8,7 @@
 * CRUD: create, update and remove burgers with mongo
 * Drag and drop ordering
 * Burgers are imported when building with docker
+* Responsive (Foundation css was included, because it is so lightweight, and the only thing used is its grid sistem to achieve this)
 
 ### Run with Docker
 
@@ -27,6 +28,13 @@ All front-end logic is held inside `public/modules` dir
 ### mongo imported data
 
 Data added when building with docker is held in file `init.json` inside `mongo` dir
+
+### ES6 modules are available in modern browsers, this example proyect will only work with those that do support them:
+
+* Safari 10.1
+* Chrome 61
+* Firefox 60
+* Edge 16
 
 ## Creator
 
