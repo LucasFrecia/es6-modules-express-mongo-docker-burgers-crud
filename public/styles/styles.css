@@ -61,6 +61,10 @@ body {
     width: 100%;
 }
 
+.label {
+  margin-left: 1em;
+}
+
 /* CARD CSS START */
 .card, .new-buerger-card {
   overflow: hidden;
@@ -82,7 +86,17 @@ body {
   margin-bottom: 10px;
 }
 
+.card-text {
+  padding: 30px;
+  float: left;
+  display: block;
+}
+
 @media (max-width: 600px) {
+  .card-text {
+    width: 100%;
+  }
+
   .card, .new-buerger-card {
     height: 550px;
   }
@@ -93,24 +107,23 @@ body {
 }
 
 @media (min-width: 601px) {
+  .card-text {
+    width: 64%;
+  }
+
   .card, .new-buerger-card {
-    height: 300px;
+    height: 320px;
   }
 
   .image-container {
-    height: 300px;
+    width: 320px !important;
+    height: 320px;
     float: left;
   }
 
   .card-image {
     min-height: 100%;
   }
-}
-
-.card-text {
-  padding: 30px;
-  float: left;
-  display: block;
 }
 
 .card:hover {

@@ -1,3 +1,7 @@
+/**
+ * BURGERS_ACTIONS will do the actual db manipulatins and return the new data
+ * @author Lucas Frecia <frecialucas@gmail.com>
+ */
 function BURGERS_ACTIONS() {}
 
 BURGERS_ACTIONS.prototype.get = (collection, db, res, id = null) => {
@@ -40,8 +44,11 @@ BURGERS_ACTIONS.prototype.add = (collection, db, res, doc = null) => {
 };
 
 BURGERS_ACTIONS.prototype.update = (collection, db, res, doc = null) => {
+
+  doc.img = doc.imgName;
+
   collection
-    .update(doc)
+    .update({ _id: doc._id }, doc)
     .then(() => {
       return collection.find();
     })
@@ -54,6 +61,7 @@ BURGERS_ACTIONS.prototype.update = (collection, db, res, doc = null) => {
 };
 
 BURGERS_ACTIONS.prototype.delete = (collection, db, res, doc = null) => {
+  
   removeItems = doc ? doc : {};
 
   collection

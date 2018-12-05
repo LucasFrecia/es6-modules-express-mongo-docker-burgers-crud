@@ -63,8 +63,6 @@ export class BurgerCore {
     let textDiv = document.createElement('div');
     textDiv.classList.add('container');
     textDiv.classList.add('card-text');
-    textDiv.classList.add('small-12');
-    textDiv.classList.add('large-6');
 
     return textDiv;
   }
@@ -151,4 +149,19 @@ export function fileLitsener(imageNode, idName, containerId) {
    };
    reader.readAsDataURL(file);
  };
+}
+
+/**
+ * validateImage - use to validate img extension, valids are jpg, png and gif
+ * @param imgName
+ * @returns {boolean}
+ */
+export function validateImage(imgName) {
+    /** Validate img is valid, server will also check and throw error if invalid */
+    if (!imgName.match(/\.(jpg|png|gif)$/)) { 
+        alert('Only jpg, gif and png images are allowed...');
+        return false;
+    }
+
+    return true;
 }

@@ -3,7 +3,7 @@
  * @author Lucas Frecia <frecialucas@gmail.com>
  */
 
-import { BurgerCore, fileLitsener } from './burger-core.mjs';
+import { BurgerCore, fileLitsener, validateImage } from './burger-core.mjs';
 import { update } from './burger-module.mjs';
 
 export class BurgerEditItem extends BurgerCore {
@@ -28,7 +28,7 @@ export class BurgerEditItem extends BurgerCore {
               <div id="editImage" class="image-container small-12 large-6">
                   <img id="edit-burger-image" class="card-image" src="${item.img}" alt="Burger pic" >
               </div>
-              <div class="container card-text small-12 large-6">
+              <div class="container card-text">
                   <textarea class="boxsize" id="edit-burger-text" maxlength="300" rows="6" > ${item.description} </textarea>
               </div>
               <div class="container card-text small-12 large-6" >
@@ -56,23 +56,22 @@ export class BurgerEditItem extends BurgerCore {
 
       document.getElementById('editing').appendChild(this.buttonContainer);
 
-      const updateBtn = document.getElementById(`addBtn${item._id}`); // .onclick = function() {
-      //  const [newDescription, newFileName, newFile] = [document.getElementById('edit-burger-text').value, document.getElementById('edit-file').files[0].name, document.getElementById('edit-file').files[0]];
-     /*   let formData = new FormData();
-        formData.append('img', document.getElementById('edit-file').files[0]);
-        formData.append('imgName', document.getElementById('edit-file').files[0].name);
-        formData.append('description', document.getElementById('edit-burger-text').value);
-        console.log(formData);*/
+      const updateBtn = document.getElementById(`addBtn${item._id}`);
 
       fileLitsener(document.getElementById('edit-file'), 'edit-burger-image', 'editImage');
 
       updateBtn.onclick = () => {
+        console.log(item);
         let formData = new FormData();
+        formData.append('_id', item._id);
+        formData.append('position', item.position);
         formData.append('img', document.getElementById('edit-file').files[0]);
         formData.append('imgName', document.getElementById('edit-file').files[0].name);
         formData.append('description', document.getElementById('edit-burger-text').value);
-        console.log(document.getElementById('edit-burger-text').value);
-        console.log(formData);
+
+        /** Validate img is valid, server will also check and throw error if invalid */
+        if (!validateImage(document.getElementById('edit-file').files[0].name)) return;
+
         update(formData);
       };
         
@@ -97,5 +96,4 @@ export class BurgerEditItem extends BurgerCore {
        }
     }
   }
-
 }

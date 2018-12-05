@@ -9,7 +9,10 @@ import {
     counterInit
 } from './burger-module.mjs';
 import { DragDrop } from './drag-and-drop.mjs';
-import { fileLitsener } from './burger-core.mjs';
+import { 
+    fileLitsener,
+    validateImage
+} from './burger-core.mjs';
 
 /** Add litseners Start */
     let burgerForm = document.getElementById('new-buerger-form');
@@ -24,11 +27,24 @@ import { fileLitsener } from './burger-core.mjs';
     fileLitsener(imageNode, 'new-burger-image', 'newImage');
 
     addBtn.onclick = () => {
+        
+        const file = document.getElementById('file').files[0];
+
+        if (!file) {
+            alert('Please choose an image...');
+            return;
+        };
+
         let formData = new FormData();
-        formData.append('img', document.getElementById('file').files[0]);
-        formData.append('imgName', document.getElementById('file').files[0].name);
+        formData.append('img', file);
+        formData.append('imgName', file.name);
         formData.append('description', document.getElementById('new-burger-text').value);
 
+        /** Validate img is valid, server will also check and throw error if invalid */
+        if (!validateImage(file.name)) return;
+        
+        createBtn.classList.toggle('hidden');
+        burgerForm.classList.toggle('hidden');
         addBurger(formData);
     };
 

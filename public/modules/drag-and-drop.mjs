@@ -1,6 +1,5 @@
 import {
   insertAfter,
-  removeDOMNode,
   getDOMNodePosition,
   swapTwoDOMNodes
 } from './burger-module.mjs';
@@ -104,7 +103,9 @@ export class DragDrop {
     dividerAbove.classList.remove('not-animated');
 
     this.savedDivider = this.draggingItem.nextElementSibling;
-    removeDOMNode(this.savedDivider);
+
+    /** Remove DomNODE  */
+    this.savedDivider.remove();
   }
 
   /**

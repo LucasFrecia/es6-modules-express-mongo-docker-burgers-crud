@@ -66,6 +66,7 @@ export function getlList() {
     method: 'GET'
   };
 
+  /** Use ES6 native interface to replace XMLHttpRequest */
   fetch(Url, otherParam)
     .then(data => {
       return data.json();
@@ -79,7 +80,7 @@ export function getlList() {
  * @param {object} burger - burger obj to be added
  */
 export function addBurger(burger) {
-  const Url = `${API}burgers`;
+  const Url = `${API}burger`;
   const otherParam = {
     method: 'POST',
     body: burger
@@ -129,11 +130,8 @@ export function remove(id = null) {
 export function update(data = null) {
   const Url = `${API}burger`;
   const otherParam = {
-    headers: {
-      'content-type': 'application/json; charset=UTF-8'
-    },
     method: 'PUT',
-    body: JSON.stringify(data)
+    body: data
   };
 
   fetch(Url, otherParam)
@@ -178,16 +176,6 @@ export function counterInit() {
     })();
 
     counter.init();
-}
-
-/**
- * This function removes given DOM node
- *
- * @param node - DOM Node to remove
- * */
-export function removeDOMNode(node) {
-  node.remove();
-  // node.parentNode.removeChild(node);
 }
 
 /**
