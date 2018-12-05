@@ -2,6 +2,7 @@
 
 ## What's included
 
+* TODO: Missing save logic when ordering with drag and drop
 * ES6 modules implementation 
 * ES6 class implementation
 * no jquery nor other, only native ES6
