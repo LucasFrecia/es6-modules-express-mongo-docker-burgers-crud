@@ -1,3 +1,6 @@
+![](burgers-example.gif)
+
+
 <h3 align="center"> ES6 Burgers CRUD app </h3>
 
 ## What's included

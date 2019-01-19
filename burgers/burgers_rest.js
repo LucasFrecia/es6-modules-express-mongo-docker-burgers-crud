@@ -62,6 +62,12 @@ BURGERS_ROUTER.prototype.handleRoutes = (router, collection, db, upload) => {
 
     const item = req.body;
 
+    if (item.length > 1) {
+      item.map(it => {
+        
+      });
+    }
+
     if (!item) {
       return res.json({error: true, message: 'Please make sure the burger has all required data...'});
     }
