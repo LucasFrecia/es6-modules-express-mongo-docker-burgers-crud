@@ -2,7 +2,7 @@ import {
   insertAfter,
   getDOMNodePosition,
   swapTwoDOMNodes
-} from './burger-module.mjs';
+} from './burger-module';
 
 /**
  * DragDrop class

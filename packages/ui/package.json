@@ -1,0 +1,19 @@
+{
+  "name": "ui",
+  "version": "1.0.0",
+  "license": "MIT",
+  "main": "./src/index.html",
+  "typings": "./index.d.ts",
+  "scripts": {
+    "build": "parcel build src/index.html",
+    "watch": "parcel watch src/index.html"
+  },
+  "devDependencies": {
+    "sass": "^1.26.10"
+  },
+  "dependencies": {
+    "bootstrap": "5.0.0-alpha1",
+    "foundation": "^4.2.1-1",
+    "popper.js": "^1.16.1"
+  }
+}
