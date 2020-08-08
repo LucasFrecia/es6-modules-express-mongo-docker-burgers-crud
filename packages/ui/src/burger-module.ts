@@ -2,10 +2,10 @@
  * Burger Module
  * @author Lucas Frecia <frecialucas@gmail.com>
  */
-import { BurgerItem } from './burger-item.mjs';
-import { BurgerEditItem } from './burger-edit-item.mjs';
-import { DragDrop } from './drag-and-drop.mjs';
-import { API } from './app-config.mjs';
+import { BurgerItem } from '/burger-item';
+import { BurgerEditItem } from './burger-edit-item';
+import { DragDrop } from './drag-and-drop';
+import { API } from './app-config';
 
 /**
  * clearList method will remove all burger card dom elements

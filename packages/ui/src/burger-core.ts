@@ -20,7 +20,7 @@ export class BurgerCore {
    * @param {string} id - id that will act as a tag anchor
    * @return {HtmlDomElement} - will return a <div> container tag
    */
-  createCardContainer(id) {
+  createCardContainer(id: string) {
     let cardDiv = document.createElement('div');
     cardDiv.classList.add('card');
     cardDiv.setAttribute('id', id);
@@ -46,7 +46,7 @@ export class BurgerCore {
    * @param {string} imgSrc
    * @returns {HtmlDomElement} - returns a <img> tag
    */
-  createImage(imgSrc) {
+  createImage(imgSrc: string) {
     let img = document.createElement('img');
     img.classList.add('card-image');
     img.setAttribute('src', imgSrc);
@@ -72,7 +72,7 @@ export class BurgerCore {
    * @param text
    * @returns {HtmlDomElement} - returns a <p> tag with the given text
    */
-  textNode(text) {
+  textNode(text: string) {
     let paragraph = document.createElement('p');
     let textNode = document.createTextNode(text);
 
@@ -85,8 +85,8 @@ export class BurgerCore {
    * createButtonContainer method will return a countainer in which burger item buttons mst be placed
    * @returns {HtmlDomElement} - returns a <div> container tag
    */
-  createButtonContainer() {
-    let buttonDiv = document.createElement('div');
+  createButtonContainer(): HTMLElement {
+    const buttonDiv = document.createElement('div');
     buttonDiv.classList.add('container');
     buttonDiv.classList.add('card-text');
     buttonDiv.classList.add('small-12');
@@ -102,11 +102,11 @@ export class BurgerCore {
    * @param {string} btnText - Button inner text.
    * @returns {HtmlDomElement} - returns the <button> tag
    */
-  createButton(classArray, attributesObj, btnText) {
+  createButton(classArray: string[], attributesObj: {}, btnText: string) {
     let deleteButton = document.createElement('button');
 
     /** Loop through attributes to set them  */
-    for (const [key, value] of Object.entries(attributesObj)) {
+    for (const [key, value] of Object.entries<string>(attributesObj)) {
       deleteButton.setAttribute(key, value);
     }
 
@@ -128,27 +128,27 @@ export class BurgerCore {
  * @param {string} containerId 
  * @returns {void}
  */
-export function fileLitsener(imageNode, idName, containerId) {
- imageNode.onchange = () => {
-   let el = document.getElementById(idName);
-   /** Remove prior image if it exists */
-   if (el) {
-     el.remove();
-   }
+export function fileLitsener(imageNode: HTMLInputFileElement, idName: string, containerId: string) {
+  imageNode.onchange = () => {
+    let el = document.getElementById(idName);
+    /** Remove prior image if it exists */
+    if (el) {
+      el.remove();
+    }
 
-   let file = imageNode.files[0];
-   let reader = new FileReader();
-   reader.onload = e => {
-     let image = document.createElement('img');
-     image.setAttribute('id', idName);
-     image.classList.add('card-image');
-     image.src = e.target.result;
+    const file: any = imageNode.files[0]; // TODO remove any
+    let reader = new FileReader();;
+    reader.onload = (ev: ProgressEvent<any>) => {
+      let image = document.createElement('img');
+      image.setAttribute('id', idName);
+      image.classList.add('card-image');
+      image.src = (ev.target && ev.target.result)+''; // TODO review +''
 
-     const imgDiv = document.getElementById(containerId);
-     imgDiv.appendChild(image);
-   };
-   reader.readAsDataURL(file);
- };
+      const imgDiv: HTMLElement | null = document.getElementById(containerId);
+      imgDiv?.appendChild(image);
+    };
+    reader.readAsDataURL(file);
+  };
 }
 
 /**
@@ -156,12 +156,11 @@ export function fileLitsener(imageNode, idName, containerId) {
  * @param imgName
  * @returns {boolean}
  */
-export function validateImage(imgName) {
-    /** Validate img is valid, server will also check and throw error if invalid */
-    if (!imgName.match(/\.(jpg|png|gif)$/)) { 
-        alert('Only jpg, gif and png images are allowed...');
-        return false;
-    }
-
-    return true;
+export const validateImage = (imgName: string) => {
+  /** Validate img is valid, server will also check and throw error if invalid */
+  if (!imgName.match(/\.(jpg|png|gif)$/)) { 
+      alert('Only jpg, gif and png images are allowed...');
+      return false;
+  }
+  return true;
 }

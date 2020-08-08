@@ -1,21 +1,36 @@
 {
-    "name": "burgers",
-    "version": "1.0.0",
-    "description": "es6-modules-express-mongo-docker-burgers-crud",
-    "author": "Lucas Frecia <frecialucas@gmail.com>",
-    "private": false,
-    "license": "MIT",
-    "repository": "git@github.com:LucasFrecia/es6-modules-express-mongo-docker-burgers-crud.git",
-    "scripts": {
-     "start": "node app.js"
-    },
-    "dependencies": {
-     "body-parser": "~1.18.2",
-     "express": "~4.16.4",
-     "mongodb": "~3.1.0",
-     "monk": "~6.0.6",
-     "helmet": "^3.1.0",
-     "multer": "^1.4.1"
-    }
-   }
-    
+ "name": "burgers",
+ "version": "1.1.0",
+ "description": "es6-modules-express-mongo-docker-burgers-crud",
+ "author": "Lucas Frecia <frecialucas@gmail.com>",
+ "private": true,
+ "license": "MIT",
+ "repository": "git@github.com:LucasFrecia/es6-modules-express-mongo-docker-burgers-crud.git",
+ "workspaces": [
+  "packages/*"
+ ],
+ "scripts": {
+  "start": "yarn api start",
+  "start:dev": "lerna run --parallel watch",
+  "build": "lerna run --parallel build",
+  "api": "yarn workspace api",
+  "ui": "yarn workspace ui"
+ },
+ "dependencies": {
+  "@types/express": "^4.17.7",
+  "@types/helmet": "0.0.47",
+  "@types/multer": "^1.4.3",
+  "@types/node": "^14.0.27",
+  "prettier": "^2.0.5",
+  "typescript": "^3.9.7"
+ },
+ "devDependencies": {
+  "cypress": "^4.12.1",
+  "eslint": "^7.6.0",
+  "eslint-config-airbnb-base": "^14.2.0",
+  "eslint-plugin-import": "^2.22.0",
+  "lerna": "^3.22.1",
+  "parcel-bundler": "^1.12.4",
+  "ts-node-dev": "^1.0.0-pre.56"
+ }
+}

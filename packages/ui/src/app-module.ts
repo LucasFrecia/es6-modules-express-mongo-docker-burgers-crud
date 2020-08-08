@@ -7,12 +7,11 @@ import {
     remove,
     addBurger,
     counterInit
-} from './burger-module.mjs';
-import { DragDrop } from './drag-and-drop.mjs';
+} from './burger-module';
 import { 
     fileLitsener,
     validateImage
-} from './burger-core.mjs';
+} from './burger-core';
 
 /** Add litseners Start */
     let burgerForm = document.getElementById('new-buerger-form');
@@ -20,12 +19,14 @@ import {
     let createBtn = document.getElementById('createBtn');
     let deleteBtn = document.getElementById('deleteBtn')
     let addBtn = document.getElementById('addBtn');
-    let imageNode = document.getElementById('file');
+    let imageNode: HTMLInputElement = document.getElementById('file');
 /** Add litseners End*/
 
 /** Add actions Start */
-    fileLitsener(imageNode, 'new-burger-image', 'newImage');
-
+    if (imageNode) {
+        fileLitsener(imageNode, 'new-burger-image', 'newImage');
+    }
+    
     addBtn.onclick = () => {
         
         const file = document.getElementById('file').files[0];

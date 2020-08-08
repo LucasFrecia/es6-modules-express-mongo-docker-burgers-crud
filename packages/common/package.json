@@ -1,0 +1,7 @@
+{
+  "name": "common",
+  "version": "1.0.0",
+  "description": "Shared helpers",
+  "license": "MIT",
+  "main": "./src/index.ts"
+}
