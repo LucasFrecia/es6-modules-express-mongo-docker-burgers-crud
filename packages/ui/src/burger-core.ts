@@ -9,8 +9,8 @@ export class BurgerCore {
    * @return {HtmlDomElement} - divider <div> tag
    */
   createDivider() {
-    let cardDivider = document.createElement('div');
-    cardDivider.classList.add('divider');
+    let cardDivider = document.createElement("div");
+    cardDivider.classList.add("divider");
 
     return cardDivider;
   }
@@ -21,9 +21,9 @@ export class BurgerCore {
    * @return {HtmlDomElement} - will return a <div> container tag
    */
   createCardContainer(id: string) {
-    let cardDiv = document.createElement('div');
-    cardDiv.classList.add('card');
-    cardDiv.setAttribute('id', id);
+    let cardDiv = document.createElement("div");
+    cardDiv.classList.add("card");
+    cardDiv.setAttribute("id", id);
 
     return cardDiv;
   }
@@ -33,10 +33,10 @@ export class BurgerCore {
    * @return {HtmlDomElement}
    */
   createImgContainer() {
-    let imgDiv = document.createElement('div');
-    imgDiv.classList.add('image-container');
-    imgDiv.classList.add('small-12');
-    imgDiv.classList.add('large-6');
+    let imgDiv = document.createElement("div");
+    imgDiv.classList.add("image-container");
+    imgDiv.classList.add("small-12");
+    imgDiv.classList.add("large-6");
 
     return imgDiv;
   }
@@ -47,10 +47,10 @@ export class BurgerCore {
    * @returns {HtmlDomElement} - returns a <img> tag
    */
   createImage(imgSrc: string) {
-    let img = document.createElement('img');
-    img.classList.add('card-image');
-    img.setAttribute('src', imgSrc);
-    img.setAttribute('alt', 'Burger pic');
+    let img = document.createElement("img");
+    img.classList.add("card-image");
+    img.setAttribute("src", imgSrc);
+    img.setAttribute("alt", "Burger pic");
 
     return img;
   }
@@ -60,9 +60,9 @@ export class BurgerCore {
    * @returns {HtmlDomElement} - returns a <div> tag that will act as a paragraph container
    */
   createTextDiv() {
-    let textDiv = document.createElement('div');
-    textDiv.classList.add('container');
-    textDiv.classList.add('card-text');
+    let textDiv = document.createElement("div");
+    textDiv.classList.add("container");
+    textDiv.classList.add("card-text");
 
     return textDiv;
   }
@@ -73,7 +73,7 @@ export class BurgerCore {
    * @returns {HtmlDomElement} - returns a <p> tag with the given text
    */
   textNode(text: string) {
-    let paragraph = document.createElement('p');
+    let paragraph = document.createElement("p");
     let textNode = document.createTextNode(text);
 
     paragraph.appendChild(textNode);
@@ -86,11 +86,11 @@ export class BurgerCore {
    * @returns {HtmlDomElement} - returns a <div> container tag
    */
   createButtonContainer(): HTMLElement {
-    const buttonDiv = document.createElement('div');
-    buttonDiv.classList.add('container');
-    buttonDiv.classList.add('card-text');
-    buttonDiv.classList.add('small-12');
-    buttonDiv.classList.add('large-6');
+    const buttonDiv = document.createElement("div");
+    buttonDiv.classList.add("container");
+    buttonDiv.classList.add("card-text");
+    buttonDiv.classList.add("small-12");
+    buttonDiv.classList.add("large-6");
 
     return buttonDiv;
   }
@@ -103,7 +103,7 @@ export class BurgerCore {
    * @returns {HtmlDomElement} - returns the <button> tag
    */
   createButton(classArray: string[], attributesObj: {}, btnText: string) {
-    let deleteButton = document.createElement('button');
+    let deleteButton = document.createElement("button");
 
     /** Loop through attributes to set them  */
     for (const [key, value] of Object.entries<string>(attributesObj)) {
@@ -123,12 +123,16 @@ export class BurgerCore {
 
 /**
  * fileLitsener should be called when a file input must render the image to show the user before posting
- * @param {HtmlDomObject} imageNode 
- * @param {string} idName 
- * @param {string} containerId 
+ * @param {HtmlDomObject} imageNode
+ * @param {string} idName
+ * @param {string} containerId
  * @returns {void}
  */
-export function fileLitsener(imageNode: HTMLInputFileElement, idName: string, containerId: string) {
+export function fileLitsener(
+  imageNode: HTMLInputFileElement,
+  idName: string,
+  containerId: string
+) {
   imageNode.onchange = () => {
     let el = document.getElementById(idName);
     /** Remove prior image if it exists */
@@ -137,12 +141,12 @@ export function fileLitsener(imageNode: HTMLInputFileElement, idName: string, co
     }
 
     const file: any = imageNode.files[0]; // TODO remove any
-    let reader = new FileReader();;
+    let reader = new FileReader();
     reader.onload = (ev: ProgressEvent<any>) => {
-      let image = document.createElement('img');
-      image.setAttribute('id', idName);
-      image.classList.add('card-image');
-      image.src = (ev.target && ev.target.result)+''; // TODO review +''
+      let image = document.createElement("img");
+      image.setAttribute("id", idName);
+      image.classList.add("card-image");
+      image.src = (ev.target && ev.target.result) + ""; // TODO review +''
 
       const imgDiv: HTMLElement | null = document.getElementById(containerId);
       imgDiv?.appendChild(image);
@@ -158,9 +162,9 @@ export function fileLitsener(imageNode: HTMLInputFileElement, idName: string, co
  */
 export const validateImage = (imgName: string) => {
   /** Validate img is valid, server will also check and throw error if invalid */
-  if (!imgName.match(/\.(jpg|png|gif)$/)) { 
-      alert('Only jpg, gif and png images are allowed...');
-      return false;
+  if (!imgName.match(/\.(jpg|png|gif)$/)) {
+    alert("Only jpg, gif and png images are allowed...");
+    return false;
   }
   return true;
-}
+};

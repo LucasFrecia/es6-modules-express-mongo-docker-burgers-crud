@@ -1,8 +1,8 @@
 import {
   insertAfter,
   getDOMNodePosition,
-  swapTwoDOMNodes
-} from './burger-module';
+  swapTwoDOMNodes,
+} from "./burger-module";
 
 /**
  * DragDrop class
@@ -18,9 +18,9 @@ export class DragDrop {
      */
     this.DURATION_OF_DRAGGING_ITEM_ANIMATION = 200;
 
-    const listNode = document.getElementById('burger-list');
+    const listNode = document.getElementById("burger-list");
 
-    const items = Array.from(listNode.getElementsByClassName('card'));
+    const items = Array.from(listNode.getElementsByClassName("card"));
 
     this.isMouseDown = false;
     this.isDragging = false;
@@ -36,8 +36,8 @@ export class DragDrop {
      */
     this.savedDivider = null;
 
-    items.forEach(item => {
-      item.addEventListener('mousedown', () => {
+    items.forEach((item) => {
+      item.addEventListener("mousedown", () => {
         if (this.hasLastAnimationCompleted) {
           this.draggingItem = item;
           this.isMouseDown = true;
@@ -47,7 +47,7 @@ export class DragDrop {
       item.ondragstart = () => false;
     });
 
-    document.addEventListener('mouseup', () => {
+    document.addEventListener("mouseup", () => {
       if (this.draggingItem && this.isDragging) {
         this.stopDraggingHandler();
       }
@@ -58,7 +58,7 @@ export class DragDrop {
       this.mouseOffsetY = null;
     });
 
-    document.addEventListener('mousemove', event => {
+    document.addEventListener("mousemove", (event) => {
       this.isDragging = this.isMouseDown;
       if (this.isDragging) {
         this.handleDragging(event);
@@ -80,13 +80,16 @@ export class DragDrop {
   startDraggingHandler(event) {
     const dividerAbove = this.draggingItem.previousElementSibling;
 
-    this.mouseOffsetX = event.pageX - getDOMNodePosition(this.draggingItem).left;
+    this.mouseOffsetX =
+      event.pageX - getDOMNodePosition(this.draggingItem).left;
     this.mouseOffsetY = event.pageY - getDOMNodePosition(this.draggingItem).top;
 
-    this.draggingItem.classList.add('draggable');
+    this.draggingItem.classList.add("draggable");
 
-    dividerAbove.classList.add('not-animated');
-    dividerAbove.style.height = `${10 * this.DIVIDER_HEIGHT + this.draggingItem.offsetHeight}px`;
+    dividerAbove.classList.add("not-animated");
+    dividerAbove.style.height = `${
+      10 * this.DIVIDER_HEIGHT + this.draggingItem.offsetHeight
+    }px`;
 
     /**
      * The browser doesn't update transition property, changed by adding and then removing class,
@@ -98,9 +101,9 @@ export class DragDrop {
      *
      * See stackoverflow answer: https://stackoverflow.com/a/24195559
      */
-    window.getComputedStyle(dividerAbove).getPropertyValue('transition');
+    window.getComputedStyle(dividerAbove).getPropertyValue("transition");
 
-    dividerAbove.classList.remove('not-animated');
+    dividerAbove.classList.remove("not-animated");
 
     this.savedDivider = this.draggingItem.nextElementSibling;
 
@@ -125,24 +128,26 @@ export class DragDrop {
     const dividerAbove = this.draggingItem.previousElementSibling;
     const dividerAbovePosition = getDOMNodePosition(dividerAbove);
 
-    this.draggingItem.classList.add('animated-draggable-item');
+    this.draggingItem.classList.add("animated-draggable-item");
 
-    this.draggingItem.style.top = `${dividerAbovePosition.top + this.DIVIDER_HEIGHT}px`;
+    this.draggingItem.style.top = `${
+      dividerAbovePosition.top + this.DIVIDER_HEIGHT
+    }px`;
     this.draggingItem.style.left = `${dividerAbovePosition.left}px`;
 
     this.hasLastAnimationCompleted = false;
 
     setTimeout(() => {
-      this.draggingItem.classList.remove('draggable');
-      this.draggingItem.classList.remove('animated-draggable-item');
+      this.draggingItem.classList.remove("draggable");
+      this.draggingItem.classList.remove("animated-draggable-item");
 
-      dividerAbove.classList.add('not-animated');
+      dividerAbove.classList.add("not-animated");
       dividerAbove.style.height = `${this.DIVIDER_HEIGHT}px`;
 
       // see startDraggingHandler function for comment
-      window.getComputedStyle(dividerAbove).getPropertyValue('transition');
+      window.getComputedStyle(dividerAbove).getPropertyValue("transition");
 
-      dividerAbove.classList.remove('not-animated');
+      dividerAbove.classList.remove("not-animated");
 
       insertAfter(this.savedDivider, this.draggingItem);
 
@@ -171,7 +176,8 @@ export class DragDrop {
      * <div class="card"> ... </div>           | Next card after dragging card
      * <div class="divider"></div>             | Divider under next card
      */
-    const prevItem = this.draggingItem.previousElementSibling.previousElementSibling;
+    const prevItem = this.draggingItem.previousElementSibling
+      .previousElementSibling;
     const nextItem = this.draggingItem.nextElementSibling;
 
     /**
@@ -182,10 +188,13 @@ export class DragDrop {
      */
     if (prevItem) {
       const prevItemCoordinates = getDOMNodePosition(prevItem);
-      const shouldSwapItems = draggingItemCoordinates.top + this.draggingItem.offsetHeight / 2 < prevItemCoordinates.top + prevItem.offsetHeight / 2;
+      const shouldSwapItems =
+        draggingItemCoordinates.top + this.draggingItem.offsetHeight / 2 <
+        prevItemCoordinates.top + prevItem.offsetHeight / 2;
 
       if (shouldSwapItems) {
-        const dividerAboveDraggingItem = this.draggingItem.previousElementSibling;
+        const dividerAboveDraggingItem = this.draggingItem
+          .previousElementSibling;
         const dividerAbovePrevItem = prevItem.previousElementSibling;
 
         dividerAboveDraggingItem.style.height = `${this.DIVIDER_HEIGHT}px`;
@@ -193,7 +202,9 @@ export class DragDrop {
         swapTwoDOMNodes(this.draggingItem, dividerAboveDraggingItem);
         swapTwoDOMNodes(this.draggingItem, prevItem);
 
-        dividerAbovePrevItem.style.height = `${this.draggingItem.offsetHeight + 2 * this.DIVIDER_HEIGHT}px`;
+        dividerAbovePrevItem.style.height = `${
+          this.draggingItem.offsetHeight + 2 * this.DIVIDER_HEIGHT
+        }px`;
 
         return;
       }
@@ -207,10 +218,13 @@ export class DragDrop {
      */
     if (nextItem) {
       const nextItemCoodridanes = getDOMNodePosition(nextItem);
-      const shouldSwapItems = draggingItemCoordinates.top + this.draggingItem.offsetHeight / 2 > nextItemCoodridanes.top + nextItem.offsetHeight / 2;
+      const shouldSwapItems =
+        draggingItemCoordinates.top + this.draggingItem.offsetHeight / 2 >
+        nextItemCoodridanes.top + nextItem.offsetHeight / 2;
 
       if (shouldSwapItems) {
-        const dividerAboveDraggingItem = this.draggingItem.previousElementSibling;
+        const dividerAboveDraggingItem = this.draggingItem
+          .previousElementSibling;
         const dividerUnderNextItem = nextItem.nextElementSibling;
 
         dividerAboveDraggingItem.style.height = `${this.DIVIDER_HEIGHT}px`;
@@ -218,7 +232,9 @@ export class DragDrop {
         swapTwoDOMNodes(this.draggingItem, nextItem);
         swapTwoDOMNodes(this.draggingItem, dividerUnderNextItem);
 
-        dividerUnderNextItem.style.height = `${this.draggingItem.offsetHeight + 2 * this.DIVIDER_HEIGHT}px`;
+        dividerUnderNextItem.style.height = `${
+          this.draggingItem.offsetHeight + 2 * this.DIVIDER_HEIGHT
+        }px`;
       }
     }
   }

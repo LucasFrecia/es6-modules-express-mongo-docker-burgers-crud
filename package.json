@@ -14,7 +14,9 @@
   "start:dev": "lerna run --parallel watch",
   "build": "lerna run --parallel build",
   "api": "yarn workspace api",
-  "ui": "yarn workspace ui"
+  "ui": "yarn workspace ui",
+  "format": "prettier --write \"**/*.ts\"",
+  "format:check": "prettier --list-different \"**/*.ts\""
  },
  "dependencies": {
   "@types/express": "^4.17.7",

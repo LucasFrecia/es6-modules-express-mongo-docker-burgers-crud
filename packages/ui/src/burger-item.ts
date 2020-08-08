@@ -3,7 +3,7 @@
  * @author Lucas Frecia <frecialucas@gmail.com>
  */
 
-import { BurgerCore } from './burger-core';
+import { BurgerCore } from "./burger-core";
 
 export class BurgerItem extends BurgerCore {
   /**
@@ -12,9 +12,9 @@ export class BurgerItem extends BurgerCore {
    */
   constructor(item) {
     super();
-    
+
     /** Create constant that will hold full burger item with image, text and buttons */
-    const parentSection = document.getElementById('burger-list');
+    const parentSection = document.getElementById("burger-list");
 
     const cardDiv = this.createCardContainer(item._id);
     const imgDiv = this.createImgContainer();
@@ -25,15 +25,15 @@ export class BurgerItem extends BurgerCore {
     const buttonContainer = this.createButtonContainer();
 
     const deleteButton = this.createButton(
-      ['button', 'delete'],
+      ["button", "delete"],
       { id: `deleteBtn${item._id}` },
-      'Delete'
+      "Delete"
     );
 
     const editButton = this.createButton(
-      ['button', 'add'],
+      ["button", "add"],
       { id: `editBtn${item._id}` },
-      'Edit'
+      "Edit"
     );
 
     buttonContainer.appendChild(editButton);

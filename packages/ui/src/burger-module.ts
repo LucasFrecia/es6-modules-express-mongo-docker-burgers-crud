@@ -2,17 +2,17 @@
  * Burger Module
  * @author Lucas Frecia <frecialucas@gmail.com>
  */
-import { BurgerItem } from '/burger-item';
-import { BurgerEditItem } from './burger-edit-item';
-import { DragDrop } from './drag-and-drop';
-import { API } from './app-config';
+import { BurgerItem } from "/burger-item";
+import { BurgerEditItem } from "./burger-edit-item";
+import { DragDrop } from "./drag-and-drop";
+import { API } from "./app-config";
 
 /**
  * clearList method will remove all burger card dom elements
  * it should be called allways before going back to get new item list
  */
 function clearList() {
-  const parentSection = document.getElementById('burger-list');
+  const parentSection = document.getElementById("burger-list");
   while (parentSection.firstChild) {
     parentSection.removeChild(parentSection.firstChild);
   }
@@ -22,7 +22,7 @@ function clearList() {
  * Private method to set counter with the title
  */
 function setCounter(totalItems) {
-  document.getElementById('total-items').textContent = totalItems;
+  document.getElementById("total-items").textContent = totalItems;
 }
 
 /**
@@ -34,18 +34,18 @@ export function listBurgers(items) {
   for (let item of items) {
     new BurgerItem(item);
 
-    document.getElementById('deleteBtn' + item._id).onclick = () => {
+    document.getElementById("deleteBtn" + item._id).onclick = () => {
       return remove(item._id);
     };
 
-    document.getElementById('editBtn' + item._id).onclick = () => {
+    document.getElementById("editBtn" + item._id).onclick = () => {
       new BurgerEditItem(item);
     };
   }
 
   setCounter(items.length);
 
-  /** 
+  /**
    *  Instantiate DtagDrop class so it can be used with burger items,
    *  it should also be called when burger items are added or removed
    */
@@ -61,18 +61,18 @@ export function getlList() {
 
   const otherParam = {
     headers: {
-      'content-type': 'application/json; charset=UTF-8'
+      "content-type": "application/json; charset=UTF-8",
     },
-    method: 'GET'
+    method: "GET",
   };
 
   /** Use ES6 native interface to replace XMLHttpRequest */
   fetch(Url, otherParam)
-    .then(data => {
+    .then((data) => {
       return data.json();
     })
-    .then(res => listBurgers(res))
-    .catch(error => console.log(error));
+    .then((res) => listBurgers(res))
+    .catch((error) => console.log(error));
 }
 
 /**
@@ -82,19 +82,19 @@ export function getlList() {
 export function addBurger(burger) {
   const Url = `${API}burger`;
   const otherParam = {
-    method: 'POST',
-    body: burger
+    method: "POST",
+    body: burger,
   };
 
   fetch(Url, otherParam)
-    .then(data => {
+    .then((data) => {
       return data.json();
     })
-    .then(res => {
+    .then((res) => {
       clearList();
       listBurgers(res);
     })
-    .catch(error => console.log(error));
+    .catch((error) => console.log(error));
 }
 
 /**
@@ -106,21 +106,21 @@ export function remove(id = null) {
   const data = id ? { _id: id } : {};
   const otherParam = {
     headers: {
-      'content-type': 'application/json; charset=UTF-8'
+      "content-type": "application/json; charset=UTF-8",
     },
-    method: 'DELETE',
-    body: JSON.stringify(data)
+    method: "DELETE",
+    body: JSON.stringify(data),
   };
 
   fetch(Url, otherParam)
-    .then(data => {
+    .then((data) => {
       return data.json();
     })
-    .then(res => {
+    .then((res) => {
       clearList();
       listBurgers(res);
     })
-    .catch(error => console.log(error));
+    .catch((error) => console.log(error));
 }
 
 /**
@@ -130,52 +130,51 @@ export function remove(id = null) {
 export function update(data = null) {
   const Url = `${API}burger`;
   const otherParam = {
-    method: 'PUT',
-    body: data
+    method: "PUT",
+    body: data,
   };
 
   fetch(Url, otherParam)
-    .then(data => {
+    .then((data) => {
       return data.json();
     })
-    .then(res => {
+    .then((res) => {
       clearList();
       listBurgers(res);
     })
-    .catch(error => console.log(error));
+    .catch((error) => console.log(error));
 }
 
 /**
- * 
+ *
  */
 export function counterInit() {
-    const counter = (() => {
-        const input = document.getElementById('new-burger-text'),
-        display = document.getElementById('counter-display'),
-        changeEvent = (evt) => {
-            const charsLeft = 300 - evt.target.value.length;
+  const counter = (() => {
+    const input = document.getElementById("new-burger-text"),
+      display = document.getElementById("counter-display"),
+      changeEvent = (evt) => {
+        const charsLeft = 300 - evt.target.value.length;
 
-            if (charsLeft < 1) {
-                display.classList.replace('success', 'error');
-            } else {
-                display.classList.replace('error', 'success');
-            }
-            
-            display.innerHTML = charsLeft;
-        },
-        getInput = () => input.value,
-        countEvent = () => input.addEventListener('keyup', changeEvent),
-        init = () => countEvent();
-
-        display.innerHTML = 300;
-
-        return {
-            init: init
+        if (charsLeft < 1) {
+          display.classList.replace("success", "error");
+        } else {
+          display.classList.replace("error", "success");
         }
 
-    })();
+        display.innerHTML = charsLeft;
+      },
+      getInput = () => input.value,
+      countEvent = () => input.addEventListener("keyup", changeEvent),
+      init = () => countEvent();
 
-    counter.init();
+    display.innerHTML = 300;
+
+    return {
+      init: init,
+    };
+  })();
+
+  counter.init();
 }
 
 /**
@@ -219,4 +218,3 @@ export function swapTwoDOMNodes(node1, node2) {
     node1.parentNode.insertBefore(node1, node2);
   }
 }
-
